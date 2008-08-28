@@ -1,0 +1,15 @@
+<%= error_messages_for 'album' %>
+<!-- begin required fields -->
+<div class="group">
+  <dl>
+    <dt><label for="album_title">Title</label></dt>
+    <dd><%= form.text_field :title, :class => 'big'  %></dd>
+		<dt><label for="album_gallery_section_id">Section</label></dt>
+    <dd><%= form.select :gallery_section_id, @sections.collect {|s| [s.name, s.id]}, :class => 'big'  %></dd>
+    <dt><label for="album_body">Album Description</label></dt>
+    <dd><%= form.text_area :description, :class => 'fat', :rows => 10  %></dd>
+		<dt><label for="album_items_per_page">Items per Page</label></dt>
+    <dd><%= form.text_field :items_per_page  %></dd>
+  </dl>
+</div>
+<!-- /end required fields -->

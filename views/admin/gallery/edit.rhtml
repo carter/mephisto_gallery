@@ -1,0 +1,133 @@
+<style type="text/css">
+	#asset_browser {
+		background:#F3F3F3 none repeat scroll 0%;
+		border-top:4px solid #CCCCCC;
+		border-bottom:4px solid #CCCCCC;
+		padding:6px;
+	}
+	
+	#asset_browser a {
+		border:0px;
+		margin:0px;
+	}
+	
+	#fileform {
+		margin-top:0px;
+	}
+	.section_divider {
+		margin-top:2em;
+	}
+</style>
+
+<%= javascript_include_tag "builder" %>
+<%= javascript_include_tag "controls" %>
+<% content_for :head do -%>
+<script language="javascript">
+	function add_video()
+	{
+		url = $('video_url').value;
+		new Ajax.Request('/admin/gallery/add_video', { parameters: 'album_id=<%= @album.id %>&video_url='+url, evalScripts: true });
+	}
+	
+	function new_thumbnail(asset_id)
+	{
+		offset = $('thumbnail_offset_' + asset_id).value;
+		new Ajax.Request('/admin/gallery/new_thumbnail', { parameters: 'asset_id='+asset_id+'&offset='+offset, evalScripts: true });
+	}
+</script>
+<% end %>
+
+<% content_for :action_nav do -%>
+  <div id="page-nav">
+  	<ul id="act-nav" class="clear">
+	    <li><%= link_to "Remove this Album", {:action => "destroy", :id => @album.id}, :confirm => 'Are your sure you want to remove this album?' %></li>
+	  </ul>
+  </div>
+<% end %>
+
+<% fields_for :album do |f| -%>
+<% content_for :sidebar do %>
+  <div class="sgroup">
+	  <h3>Optional settings</h3>
+	  <dl class="sform">
+	    <dt><label for="article_permalink">Permanent link:</label></dt>
+	    <dd><%= f.text_field :permalink %></dd>
+	  </dl>
+	</div>
+	<div class="sgroup">
+		<h3>Setting the album cover</h3>
+		<p>Use the radio button next to the delete button to select which image you'd like to use for the album cover.</p>
+	</div>
+<% end %>
+<% end %>
+
+<% content_for :form do -%>
+  <%= form_tag({:action => 'update', :id => @album.id}, {:id => 'album-form', :multipart => true}) %>
+<% end -%>
+
+<% fields_for :album do |f| -%>
+  <%= render :partial => 'form', :object => f %>
+<% end %>
+
+<table id="article-list" cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th scope="col" class="small-col"><!--Asset Thumbnail--></th>
+      <th scope="col">Title</th>
+			<th scope="col" class="small-col"><!-- Select Album Cover --></th>
+			<th scope="col" class="small-col"><!-- Remove --></th>
+    </tr>
+  </thead>
+  <tbody id="articles">
+  <% @album.assets.each do |asset| -%>
+		<%= render :partial => 'asset', :object => asset %>
+	<% end -%>
+  </tbody>
+</table>
+
+<%= sortable_element 'articles', :tag => 'tr', :complete => visual_effect(:highlight, 'articles'), :url => {:action => :reorder, :id => @album.id} %>
+
+
+<h3 class="section_divider">Add media to album by uploading</h3>
+<% fields_for :asset do |f| %>
+	<dl class="group" id="fileform">
+    <dt id="filelbls">
+      <label for="asset_data">Select files to upload</label>
+      <label for="asset_tags" id="taglbl">Tags (comma separated)</label>
+      </dt>
+    <dd class="asset-data">
+      <ul id="filefields">
+        <li>
+          <%= file_field_tag 'asset_data[]', :id => 'asset_data_1' %>
+          <%= f.text_field :tag, :size => '' %>
+          <a href="#" class="remove-file" title="remove this file field"><%= image_tag '/images/mephisto/icons/trash.gif', :class => 'iconb red' %></a>
+          <a href="#" class="tagsall" id="tagsall" style="display:none">Apply tags to all</a>
+        </li>
+      </ul>
+    </dd>
+  </dl>
+  <a href="#" id="asset-add-file" class="bottom-tab">Add another file</a>
+<% end -%>
+
+<form id="add_video_form" name="add_video_form" method="post">
+<h3 class="section_divider">Add a video</h3>
+<dl class="group" style="margin-top:0px">
+	<dt><label for="video_url">URL</label></dt>
+	<dd><%= text_field_tag 'video_url', '', :size => 64 %> <%= button_to_function "Add Video", "add_video()" %></dd>
+</dl>
+</form>
+
+<h3 class="section_divider">Add new media from existing assets</h3>
+<div id="asset_browser">
+	<% @available_assets.each do |asset| -%>
+		<% if asset.image? -%>
+			<%= link_to_remote image_tag(asset.public_filename(:thumb), :id => "available_asset_#{asset.id}"), :url => {:action => 'add_asset', :album_id => @album.id, :asset_id => asset.id} %>
+		<% end -%>
+	<% end -%>
+</div>
+	
+<p class="btns">
+  <%= submit_tag 'Update Album' %> or 
+  <%= link_to "Cancel", :controller => "gallery" %>
+</p>
+

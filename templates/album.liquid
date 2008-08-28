@@ -1,0 +1,19 @@
+<h2>{{album.title}}</h2>
+
+<div class="gallery-thumbs">
+{% for asset in album.assets %}
+	{% cycle 'opentag': '<p>', '', '', '' %} 
+	<a href="{{asset.medium_url}}" class="lightwindow"{% if asset.is_video %} params="lightwindow_type=page"{% endif %}title="{{asset.title}}"><img src="{{ asset.thumb_url }}" alt=""></a>
+	{% unless forloop.last %}
+		{% cycle 'closetag': '', '', '', '</p>' %} 
+	{% endunless %}
+{% endfor %}
+</p>
+</div>
+
+<h2>Sections</h2>
+<ul>
+	{% for gallery_section in gallery_sections %}
+		<li><a href="{{ gallery_section.url }}">{{ gallery_section.name }}</a></li>
+	{% endfor %}
+</ul>

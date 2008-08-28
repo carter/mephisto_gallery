@@ -1,0 +1,22 @@
+<% hidden ||= false %>
+
+<tr id="asset_row_<%= asset.id %>"<%= "style=\"display:none\"" if hidden%>>
+	<td>
+		<% if File.exists?(asset.full_filename(:lalli_thumb)) %>
+			<%= link_to image_tag(asset.public_filename(:lalli_thumb), :id => "asset_thumb_#{asset.id}", :name => "asset_thumb_#{asset.id}"), asset.public_filename %>
+		<% else %>
+			<%= link_to image_tag(asset.public_filename(:thumb)), asset.public_filename %>
+		<% end %>
+		<% if asset.video? %>
+			Offset: <%= text_field_tag "thumbnail_offset_#{asset.id}", '', :size => 3 %>sec
+			<%= button_to_function 'New Thumbnail', "new_thumbnail(#{asset.id})" %>
+		<% end %>
+	</td>
+	<td><span id="asset_<%= asset.id %>_title"><%= asset.title %></span></td>
+	<td><%= radio_button 'album', 'cover_id', asset.id -%></td>
+	<td><%= link_to_remote image_tag('/images/mephisto/icons/trash.gif', :class => 'iconb red'), :url => {:action => 'remove_asset', :id => asset.id }%></td>
+</tr>
+
+<script type="text/javascript">
+ new Ajax.InPlaceEditor('asset_<%= asset.id %>_title', '/admin/gallery/update_caption/<%= asset.id %>');
+</script>

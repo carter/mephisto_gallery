@@ -1,0 +1,2 @@
+<% hidden ||= false %>
+<li id="gallery_section_<%= gallery_section.id %>"<%= ' style="display:none"' if hidden %>><%= gallery_section.name %> <%= link_to_remote image_tag('/images/mephisto/icons/trash.gif', :class => 'iconb red'), :url => {:action => 'destroy_section', :id => gallery_section.id} %></li>

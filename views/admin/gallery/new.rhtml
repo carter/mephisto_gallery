@@ -1,0 +1,28 @@
+<% content_for :action_nav do -%>
+  <div id="page-nav"></div>
+<% end %>
+
+<% fields_for :album do |f| -%>
+<% content_for :sidebar do %>
+  <div class="sgroup">
+	  <h3>Optional settings</h3>
+	  <dl class="sform">
+	    <dt><label for="article_permalink">Permanent link:</label></dt>
+	    <dd><%= f.text_field :permalink %></dd>
+	  </dl>
+	</div>
+<% end %>
+<% end %>
+
+<% content_for :form do -%>
+  <%= form_tag({:action => 'create'}, {:id => 'album-form', :multipart => true}) %>
+<% end -%>
+
+<% fields_for :album do |f| -%>
+  <%= render :partial => 'form', :object => f %>
+  
+  <p class="btns">
+    <%= submit_tag 'Create Album' %> or 
+    <%= link_to "Cancel", :controller => "gallery" %>
+  </p>
+<% end -%>

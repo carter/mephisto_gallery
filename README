@@ -1,0 +1,14 @@
+Mephisto Gallery Plugin
+by: Carter Parks (carter@carterparks.com)
+=========================================
+
+This plugin allows you to incorporate photo galleries into your Mephisto blog/CMS. This plugin (and all plugins as of now) requires Mephisto Edge (trunk) as Mephisto plugin support is not currently included in the latest release (0.7.3). I have had success using Mephisto Edge revision 2952 with Rails Edge revision 7472 (you'll need to install the acts_as_list plugin as well).
+
+To install this plugin, run:
+
+script/runner -e production 'Mephisto::Plugins::Gallery.install'
+
+This will make some changes to your production database and will expose a new Gallery tab to your Mephisto administration interface. From here you can create new albums, add photos, etc.
+
+http://yoursite.com/gallery will show the gallery pages. The gallery.liquid template is rendered with your layout.liquid layout to show lists of albums and the album.liquid template is rendered to show thumbnails. I've included examples in the templates folder. These should be copied to your /themes/site-id/themename/ folder (obviously you'll replace these with your actual information)
+

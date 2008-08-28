@@ -1,0 +1,23 @@
+<h2>{{gallery_section.name}}</h2>
+
+
+
+{% for album in gallery_section.albums %}
+	<div class="gallery-item">
+		<div class="photo-item">
+			<a href="{{ album.url }}"><img src="{{ album.cover }}" alt=""></a>
+		</div>
+		<div class="description-item">
+			<h3><a href="{{ album.url }}">{{ album.title }}</a></h3>
+			<p>{{ album.description }}</p>
+		</div>
+		<br class="clear">
+	</div>
+{% endfor %}
+
+<h2>Sections</h2>
+<ul>
+	{% for gallery_section in gallery_sections %}
+		<li><a href="{{ gallery_section.url }}">{{ gallery_section.name }}</a></li>
+	{% endfor %}
+</ul>
