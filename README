@@ -2,7 +2,7 @@ Mephisto Gallery Plugin
 by: Carter Parks (carter@carterparks.com)
 =========================================
 
-This plugin allows you to incorporate photo galleries into your Mephisto blog/CMS. This plugin (and all plugins as of now) requires Mephisto Edge (trunk) as Mephisto plugin support is not currently included in the latest release (0.7.3). I have had success using Mephisto Edge revision 2952 with Rails Edge revision 7472 (you'll need to install the acts_as_list plugin as well).
+This plugin allows you to incorporate photo galleries into your Mephisto blog/CMS. This plugin (and all plugins as of now) requires Mephisto Edge (trunk) as Mephisto plugin support is not currently included in the latest release (0.7.3). I have had success using Mephisto Edge revision 2952 with Rails Edge revision 7472 (you'll need to install the acts_as_list plugin as well). Update if you want this to work with later versions of mephisto.
 
 To install this plugin, run:
 
