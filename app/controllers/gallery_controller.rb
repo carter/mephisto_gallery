@@ -2,7 +2,7 @@ require 'ostruct'
 
 class GalleryController < ApplicationController
   unloadable
-  self.view_paths = [ Mephisto::Plugin.view_paths[:gallery] ]
+  
   layout false
   def index
     @gallery_section = GallerySection.find(:first, :conditions => {:site_id => site.id}, :order => 'order_by')

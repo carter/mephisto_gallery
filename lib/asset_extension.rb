@@ -6,15 +6,15 @@ class Asset < ActiveRecord::Base
       record.generate_video_thumbnail
     end
   end
+  
   has_attachment :storage => :file_system, :thumbnails => { 
-    :medium => '640x480>', 
+    :medium => '800x600>',
+    :small => '640x480', 
     :thumb => '120>', 
-    :bb_thumb => '68x57!', 
-    :bb_large => '535x645>', 
-    :lalli_thumb => '100x69!', 
-    :lalli_landscape => '570x390!', 
-    :lalli_portrait => '350x505!', 
-    :tiny => '50>' }, 
+    :square => '100x100!',
+    :tiny => '50>',
+    :sponsor => 'x75',
+    :small_sponsor => 'x45' }, 
     :max_size => 50.megabytes, 
     :processor => :rmagick
   

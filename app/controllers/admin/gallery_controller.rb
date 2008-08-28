@@ -1,6 +1,5 @@
 module Admin
   class GalleryController < Admin::BaseController
-    self.view_paths = [ Mephisto::Plugin.view_paths[:gallery] ]
       
     def index
       @albums = Album.paginate(:page => params[:page], :conditions => {:site_id => site.id}, :order => 'order_by')

@@ -1,0 +1,5 @@
+map.route '/gallery', :controller => 'gallery'
+map.route '/gallery/show_video/:id', :controller => 'gallery', :action => 'show_video'
+map.route '/gallery/:section', :controller => 'gallery', :action => 'section'
+map.route '/gallery/:section/:album', :controller => 'gallery', :action => 'show'
+map.route '/gallery/:section/:album/:page', :controller => 'gallery', :action => 'show'
