@@ -40,7 +40,7 @@
 <% content_for :action_nav do -%>
   <div id="page-nav">
   	<ul id="act-nav" class="clear">
-	    <li><%= link_to "Remove this Album", {:action => "destroy", :id => @album.id}, :confirm => 'Are your sure you want to remove this album?' %></li>
+	    <li><%= link_to "Remove this Album", {:action => "destroy", :id => @album.id}, :method => :delete, :confirm => 'Are your sure you want to remove this album?' %></li>
 	  </ul>
   </div>
 <% end %>

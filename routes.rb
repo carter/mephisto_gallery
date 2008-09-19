@@ -3,3 +3,5 @@ map.route '/gallery/show_video/:id', :controller => 'gallery', :action => 'show_
 map.route '/gallery/:section', :controller => 'gallery', :action => 'section'
 map.route '/gallery/:section/:album', :controller => 'gallery', :action => 'show'
 map.route '/gallery/:section/:album/:page', :controller => 'gallery', :action => 'show'
+map.route '/admin/gallery/:action', :controller => 'admin/gallery'
+map.route '/admin/gallery/:action/:id', :controller => 'admin/gallery'

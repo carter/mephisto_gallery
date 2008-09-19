@@ -12,9 +12,7 @@ class Asset < ActiveRecord::Base
     :small => '640x480', 
     :thumb => '120>', 
     :square => '100x100!',
-    :tiny => '50>',
-    :sponsor => 'x75',
-    :small_sponsor => 'x45' }, 
+    :tiny => '50>' }, 
     :max_size => 50.megabytes, 
     :processor => :rmagick
   

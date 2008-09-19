@@ -137,11 +137,11 @@ module Admin
       @asset.save!
       @video.save_thumbnail(@asset.full_filename)
       
-      [{:size => :thumb, :dimensions => "120>"}, {:size => :tiny, :dimensions => "50>"}].each do |h|
+      Asset.attachment_options[:thumbnails].each_pair do |key,value|
         thumb = Asset.new
-        thumb.filename = @video.save_thumbnail(@asset.full_filename(h[:size]), h[:dimensions])
+        thumb.filename = @video.save_thumbnail(@asset.full_filename(key), value)
         thumb.content_type = "image/jpeg"
-        thumb.thumbnail = h[:size].to_s
+        thumb.thumbnail = key.to_s
         thumb.parent_id = @asset.id
         thumb.site_id = site.id
         thumb.save

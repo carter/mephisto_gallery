@@ -2,8 +2,8 @@
 
 <tr id="asset_row_<%= asset.id %>"<%= "style=\"display:none\"" if hidden%>>
 	<td>
-		<% if File.exists?(asset.full_filename(:lalli_thumb)) %>
-			<%= link_to image_tag(asset.public_filename(:lalli_thumb), :id => "asset_thumb_#{asset.id}", :name => "asset_thumb_#{asset.id}"), asset.public_filename %>
+		<% if File.exists?(asset.full_filename(:thumb)) %>
+			<%= link_to image_tag(asset.public_filename(:thumb), :id => "asset_thumb_#{asset.id}", :name => "asset_thumb_#{asset.id}"), asset.public_filename %>
 		<% else %>
 			<%= link_to image_tag(asset.public_filename(:thumb)), asset.public_filename %>
 		<% end %>
